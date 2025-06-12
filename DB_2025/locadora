@@ -1,5 +1,5 @@
 CREATE TABLE clientes(
-cliente_id int PRIMARY KEY,
+cliente_id SERIAL PRIMARY KEY,
 nome VARCHAR(50),
 cpf VARCHAR(11) UNIQUE,
 data_nasc DATE,
@@ -8,7 +8,7 @@ salario DEC
 );
 
 CREATE TABLE dvd(
-dvd_id int PRIMARY KEY,
+dvd_id SERIAL PRIMARY KEY,
 titulo varchar(50),
 genero varchar(20),
 duracao time,
@@ -19,10 +19,41 @@ CREATE TABLE locacoes(
 cliente_id int,
 dvd_id int,
 data_locacao date,
+PRIMARY KEY(cliente_id, dvd_id),
 FOREIGN KEY (cliente_id) references clientes(cliente_id),
 FOREIGN KEY (dvd_id) references dvd(dvd_id)
 );
 
-INSERT INTO clientes (cliente_id, nome, cpf, data_nasc, sexo, salario) VALUES(01, 'João', 11223344556, '1996-11-10', 'M', 1500);
+INSERT INTO clientes (cliente_id, nome, cpf, data_nasc, sexo, salario) VALUES(01, 'João', 11223344556, current_timestamp, 'M', 1500);
+
+INSERT INTO clientes (cliente_id, nome, cpf, data_nasc, sexo, salario) VALUES(02, 'MARCOS', 12345678910, current_timestamp, 'M', 2000);
+
+
+
+INSERT INTO dvd(titulo, genero, duracao, situacao) VALUES('Matrix', 'ficção', '02:30:00', 'disponível');
+
+INSERT INTO dvd(titulo, genero, duracao, situacao) VALUES('Avatar', 'aventura', '01:50:00', 'Locado');
+
+INSERT INTO dvd (titulo, genero, duracao, situacao) VALUES('Matrix 2', 'ficção', '02:50:00', 'LOCADO');
+
+
+
+INSERT INTO locacoes VALUES(01,01, '2025-06-12');
+
+
+UPDATE clientes SET salario = 3000 WHERE cliente_id = 1;
+
+UPDATE dvd SET situacao = 'Disponivel' WHERE dvd_id = 3;
+
+
+UPDATE dvd SET genero = 'Acão', duracao = '03:05:00' WHERE dvd_id = 2;
+
+
+DELETE FROM dvd WHERE situacao = 'Locado';
 
 SELECT * FROM clientes;
+SELECT * FROM dvd;
+SELECT * FROM locacoes;
+
+SELECT titulo FROM dvd WHERE genero = 'ficção';
+SELECT titulo FROM dvd;
