@@ -1,0 +1,28 @@
+CREATE TABLE clientes(
+cliente_id int PRIMARY KEY,
+nome VARCHAR(50),
+cpf VARCHAR(11) UNIQUE,
+data_nasc DATE,
+sexo CHAR,
+salario DEC
+);
+
+CREATE TABLE dvd(
+dvd_id int PRIMARY KEY,
+titulo varchar(50),
+genero varchar(20),
+duracao time,
+situacao varchar(20)
+);
+
+CREATE TABLE locacoes(
+cliente_id int,
+dvd_id int,
+data_locacao date,
+FOREIGN KEY (cliente_id) references clientes(cliente_id),
+FOREIGN KEY (dvd_id) references dvd(dvd_id)
+);
+
+INSERT INTO clientes (cliente_id, nome, cpf, data_nasc, sexo, salario) VALUES(01, 'João', 11223344556, '1996-11-10', 'M', 1500);
+
+SELECT * FROM clientes;
