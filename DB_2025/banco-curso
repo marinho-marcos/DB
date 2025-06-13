@@ -1,0 +1,35 @@
+CREATE TABLE cidade(
+id_cidade SERIAL PRIMARY KEY,
+nome VARCHAR(45)
+);
+
+CREATE TABLE curso(
+id_curso SERIAL PRIMARY KEY,
+nome VARCHAR(45)
+);
+
+CREATE TABLE aluno(
+id_aluno SERIAL PRIMARY KEY,
+nome VARCHAR(80),
+sobrenome VARCHAR,
+email VARCHAR(45),
+id_cidade INT NOT NULL,
+id_curso INT NOT NULL,
+FOREIGN KEY (id_cidade) REFERENCES cidade (id_cidade),
+FOREIGN KEY (id_aluno) REFERENCES aluno (id_aluno)
+);
+
+SELECT * FROM aluno;
+
+INSERT INTO curso (nome) VALUES ('TSI'),
+('Gestão'), ('Edificações');
+
+INSERT INTO cidade (nome, descricao, uf) VALUES ('Guarabira', 'A rainha do brejo', 'PB'), ('João pessoa', 'Capital', 'PB'), ('Campina Grande', 'maior sao joao do mundo', 'PB');
+
+SELECT * FROM curso;
+
+SELECT * FROM cidade;
+
+UPDATE cidade SET UF = 'RN';
+
+UPDATE cidade SET UF = 'PB' WHERE id_cidade = 4 OR id_cidade = 5;
